@@ -1,0 +1,14 @@
+# Ignore all files with the .tmp extension
+*.tmp
+
+# Ignore the node_modules directory and all of its contents
+node_modules/
+
+# Ignore the package-lock.json file
+package-lock.json
+
+# Ignore the .env file
+.env
+
+# Ignore the npm-debug.log file
+npm-debug.log

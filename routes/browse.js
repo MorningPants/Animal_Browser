@@ -4,7 +4,7 @@ const router = express.Router();
 // Require controller modules.
 const animal_controller = require("../controllers/animalController");
 const family_controller = require("../controllers/familyController");
-const feature_controller = require("../controllers/featureController");
+const feature_controller = require("../controllers/featuresController");
 
 /// ANIMAL ROUTES ///
 

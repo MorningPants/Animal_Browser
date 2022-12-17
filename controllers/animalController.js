@@ -1,8 +1,31 @@
 const Animal = require("../models/animal");
+const Family = require("../models/family");
+const Feature = require("../models/feature");
+
+const async = require("async");
 
 exports.index = (req, res) => {
-    res.send("NOT IMPLEMENTED: Site Home Page");
-  };
+  async.parallel(
+    {
+      animal_count(callback) {
+        Animal.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
+      },
+      family_count(callback) {
+        Family.countDocuments({}, callback);
+      },
+      feature_count(callback) {
+        Feature.countDocuments({}, callback);
+      },
+    },
+    (err, results) => {
+      res.render("index", {
+        title: "Animal Browser Home",
+        error: err,
+        data: results,
+      });
+    }
+  );
+};
 
 // Display list of all Animals.
 exports.animal_list = (req, res) => {

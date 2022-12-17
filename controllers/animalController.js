@@ -1,5 +1,9 @@
 const Animal = require("../models/animal");
 
+exports.index = (req, res) => {
+    res.send("NOT IMPLEMENTED: Site Home Page");
+  };
+
 // Display list of all Animals.
 exports.animal_list = (req, res) => {
   res.send("NOT IMPLEMENTED: Animal list");

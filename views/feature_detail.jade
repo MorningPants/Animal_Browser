@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  h1 Feature: #{feature.name}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Animals
+
+    dl
+      each animal in feature_animals
+        dt
+          a(href=animal.url) #{animal.name}
+        dd #{animal.description}
+
+      else
+        p This feature has no animals

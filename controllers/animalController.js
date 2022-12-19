@@ -40,9 +40,34 @@ exports.animal_list = function (req, res, next) {
 };
 
 // Display detail page for a specific Animal.
-exports.animal_detail = (req, res) => {
-  res.send(`NOT IMPLEMENTED: Animal detail: ${req.params.id}`);
-};
+exports.animal_detail = (req, res, next) => {
+    async.parallel(
+      {
+        animal(callback) {
+          Animal.findById(req.params.id)
+            .populate("family")
+            .populate("feature")
+            .exec(callback);
+        },
+      },
+      (err, results) => {
+        if (err) {
+          return next(err);
+        }
+        if (results.animal == null) {
+          // No results.
+          const err = new Error("Animal not found");
+          err.status = 404;
+          return next(err);
+        }
+        // Successful, so render.
+        res.render("animal_detail", {
+          title: results.animal.name,
+          animal: results.animal,
+        });
+      }
+    );
+  };
 
 // Display Animal create form on GET.
 exports.animal_create_get = (req, res) => {

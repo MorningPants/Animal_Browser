@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Animal: #{animal.name}
+
+  p #[strong Families:]
+    a(href=animal.family.url) #{animal.family.name}
+  p #[strong Summary:] #{animal.description}
+  p #[strong Features:]
+    each val, index in animal.feature
+      a(href=val.url) #{val.name}
+      if index < animal.feature.length - 1
+        |,

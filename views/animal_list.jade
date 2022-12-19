@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each animal in animal_list
+      li
+        a(href=animal.url) #{animal.name}
+
+    else
+      li There are no animals.

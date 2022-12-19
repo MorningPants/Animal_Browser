@@ -28,8 +28,15 @@ exports.index = (req, res) => {
 };
 
 // Display list of all Animals.
-exports.animal_list = (req, res) => {
-  res.send("NOT IMPLEMENTED: Animal list");
+exports.animal_list = function (req, res, next) {
+  Animal.find({}, "name")
+    .sort({ name: 1 })
+    .exec(function (err, list_animals) {
+      if (err) {
+        return next(err);
+      }
+      res.render("animal_list", { title: "Animal List", animal_list: list_animals });
+    });
 };
 
 // Display detail page for a specific Animal.

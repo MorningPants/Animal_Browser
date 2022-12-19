@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each family in family_list
+      li
+        a(href=family.url) #{family.name}
+
+    else
+      li There are no families.

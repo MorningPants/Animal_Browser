@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  h1 Family: #{family.name}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Animals
+
+    dl
+      each animal in family.animal
+        dt
+          a(href=animal.url) #{animal.name}
+        dd #{animal.summary}
+
+      else
+        p This family has no animals yet.

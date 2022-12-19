@@ -1,4 +1,7 @@
 const Family = require("../models/family");
+const Animal = require("../models/animal");
+
+const async = require("async");
 
 // Display list of all Families.
 exports.family_list = (req, res, next) => {
@@ -17,9 +20,33 @@ exports.family_list = (req, res, next) => {
 };
 
 // Display detail page for a specific Family.
-exports.family_detail = (req, res) => {
-  res.send(`NOT IMPLEMENTED: Family detail: ${req.params.id}`);
-};
+exports.family_detail = (req, res, next) => {
+    async.parallel(
+      {
+        family(callback) {
+          Family.findById(req.params.id)
+            .populate("animal")
+            .exec(callback);
+        },
+      },
+      (err, results) => {
+        if (err) {
+          return next(err);
+        }
+        if (results.family == null) {
+          // No results.
+          const err = new Error("Family not found");
+          err.status = 404;
+          return next(err);
+        }
+        // Successful, so render.
+        res.render("family_detail", {
+          title: results.family.name,
+          family: results.family,
+        });
+      }
+    );
+  };
 
 // Display Family create form on GET.
 exports.family_create_get = (req, res) => {

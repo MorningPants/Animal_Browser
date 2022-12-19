@@ -8,7 +8,7 @@ const feature_controller = require("../controllers/featuresController");
 
 /// ANIMAL ROUTES ///
 
-// GET catalog home page.
+// GET browse home page.
 router.get("/", animal_controller.index);
 
 // GET request for creating a Animal. NOTE This must come before routes that display Animal (uses id).
@@ -58,8 +58,8 @@ router.post("/family/:id/update", family_controller.family_update_post);
 // GET request for one Family.
 router.get("/family/:id", family_controller.family_detail);
 
-// GET request for list of all Familys.
-router.get("/familys", family_controller.family_list);
+// GET request for list of all Families.
+router.get("/families", family_controller.family_list);
 
 /// FEATURE ROUTES ///
 

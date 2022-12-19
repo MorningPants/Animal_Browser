@@ -1,9 +1,16 @@
 const Feature = require("../models/feature");
 
 // Display list of all Features.
-exports.feature_list = (req, res) => {
-  res.send("NOT IMPLEMENTED: Feature list");
-};
+exports.feature_list = function (req, res, next) {
+    Feature.find()
+      .sort({ name: 1 })
+      .exec(function (err, list_features) {
+        if (err) {
+          return next(err);
+        }
+        res.render("feature_list", { title: "Feature List", feature_list: list_features });
+      });
+  };
 
 // Display detail page for a specific Feature.
 exports.feature_detail = (req, res) => {

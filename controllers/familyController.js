@@ -1,7 +1,7 @@
 const Family = require("../models/family");
 
 // Display list of all Families.
-exports.family_list = (req, res) => {
+exports.family_list = (req, res, next) => {
     Family.find()
     .sort({name: 1})
     .exec(function (err, list_families) {
